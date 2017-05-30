@@ -1,4 +1,8 @@
 {
+  "scripts": {
+    "postinstall": "cd client && yarn install"
+  },
+
   "name": "the_great_war",
   "private": true,
   "dependencies": {}
