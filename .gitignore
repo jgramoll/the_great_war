@@ -23,3 +23,8 @@ node_modules
 
 # Generated js bundles
 /public/webpack/*
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
