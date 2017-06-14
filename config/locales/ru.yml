@@ -1,0 +1,8 @@
+ru:
+  games: "Игры"
+  new_game: "новая игра"
+  welcome: "приветствие {name}, у вас есть {unreadCount} {unreadCount, plural,
+            one {сообщение}
+            other {Сообщения}
+          }"
+  

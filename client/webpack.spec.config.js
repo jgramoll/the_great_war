@@ -7,12 +7,14 @@ const { resolve } = require('path');
 
 const ManifestPlugin = require('webpack-manifest-plugin');
 const webpackConfigLoader = require('react-on-rails/webpackConfigLoader');
+// const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const configPath = resolve('..', 'config');
 const { devBuild, manifest, webpackOutputPath, webpackPublicOutputDir } =
   webpackConfigLoader(configPath);
 
 const config = {
+  devtool: 'inline-source-map',
 
   context: resolve(__dirname),
 
@@ -21,8 +23,12 @@ const config = {
       'es5-shim/es5-shim',
       'es5-shim/es5-sham',
       'babel-polyfill',
+      './app/bundles/HelloWorld/startup/registration',
       './app/bundles/GameList/startup/registration',
     ],
+    // vendor: [
+    //   'bootstrap-loader/extractStyles'
+    // ]
   },
 
   output: {
@@ -47,6 +53,10 @@ const config = {
       DEBUG: false,
     }),
     new ManifestPlugin({ fileName: manifest, writeToFileEmit: true }),
+    // new ExtractTextPlugin({
+    //   filename: '[name]-bundle.css',
+    //   allChunks: true
+    // })
   ],
 
   module: {
@@ -75,9 +85,15 @@ const config = {
             options: {
               modules: true,
               importLoaders: 3,
-              // localIdentName: '[name]__[local]__[hash:base64:5]'
+              localIdentName: '[local]',
             }
           },
+          // {
+          //   loader: 'postcss-loader',
+          //   options: {
+          //     plugins: 'autoprefixer'
+          //   }
+          // },
           {
             loader: 'sass-loader'
           },

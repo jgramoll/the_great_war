@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
-  get 'hello_world', to: 'hello_world#index'
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  resources :games, only: [:index]
+  resources :games, only: [:create, :update, :show, :destroy],
+    constraints: lambda { |req| req.format == :json }
+
+  root 'games#index'
 end

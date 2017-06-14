@@ -27,5 +27,10 @@ module TheGreatWar
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    config.generators do |g|
+      g.scaffold_stylesheet false
+      g.template_engine nil
+    end
   end
 end

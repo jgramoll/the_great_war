@@ -1,0 +1,9 @@
+.game-list {
+  max-width: 40rem;
+
+  &__new-game {
+    width: 10rem;
+    height: 2rem;
+    float: right;
+  }
+}

@@ -7,6 +7,7 @@ const { resolve } = require('path');
 
 const ManifestPlugin = require('webpack-manifest-plugin');
 const webpackConfigLoader = require('react-on-rails/webpackConfigLoader');
+// const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const configPath = resolve('..', 'config');
 const { devBuild, manifest, webpackOutputPath, webpackPublicOutputDir } =
@@ -14,25 +15,17 @@ const { devBuild, manifest, webpackOutputPath, webpackPublicOutputDir } =
 
 const config = {
 
-  context: resolve(__dirname),
+  // context: resolve(__dirname),
 
-  entry: {
-    'webpack-bundle': [
-      'es5-shim/es5-shim',
-      'es5-shim/es5-sham',
-      'babel-polyfill',
-      './app/bundles/GameList/startup/registration',
-    ],
-  },
-
-  output: {
-    // Name comes from the entry section.
-    filename: '[name]-[hash].js',
-
-    // Leading slash is necessary
-    publicPath: `/${webpackPublicOutputDir}`,
-    path: webpackOutputPath,
-  },
+  // entry: {
+  //   'webpack-bundle': [
+  //     'es5-shim/es5-shim',
+  //     'es5-shim/es5-sham',
+  //     'babel-polyfill',
+  //     './app/bundles/HelloWorld/startup/registration',
+  //     './app/bundles/GameList/startup/registration',
+  //   ],
+  // },
 
   resolve: {
     extensions: ['.js', '.jsx'],
@@ -41,13 +34,17 @@ const config = {
     }
   },
 
-  plugins: [
-    new webpack.EnvironmentPlugin({
-      NODE_ENV: 'development', // use 'development' unless process.env.NODE_ENV is defined
-      DEBUG: false,
-    }),
-    new ManifestPlugin({ fileName: manifest, writeToFileEmit: true }),
-  ],
+  // plugins: [
+  //   new webpack.EnvironmentPlugin({
+  //     NODE_ENV: 'development', // use 'development' unless process.env.NODE_ENV is defined
+  //     DEBUG: false,
+  //   }),
+  //   new ManifestPlugin({ fileName: manifest, writeToFileEmit: true }),
+  //   // new ExtractTextPlugin({
+  //   //   filename: '[name]-bundle.css',
+  //   //   allChunks: true
+  //   // })
+  // ],
 
   module: {
     rules: [
@@ -75,9 +72,15 @@ const config = {
             options: {
               modules: true,
               importLoaders: 3,
-              // localIdentName: '[name]__[local]__[hash:base64:5]'
+              localIdentName: '[local]',
             }
           },
+          // {
+          //   loader: 'postcss-loader',
+          //   options: {
+          //     plugins: 'autoprefixer'
+          //   }
+          // },
           {
             loader: 'sass-loader'
           },
