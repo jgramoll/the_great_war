@@ -23,6 +23,7 @@ node_modules
 
 # Generated js bundles
 /public/webpack/*
+/client/app/libs/i18n/*
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*

@@ -38,15 +38,15 @@ RSpec.describe GamesController, type: :controller do
     wrong_field: "a"
   } }
 
-  # This should return the minimal set of values that should be in the session
-  # in order to pass any filters (e.g. authentication) defined in
-  # GamesController. Be sure to keep this updated too.
-  let(:valid_session) { {} }
+  before do
+    sign_in a_user
+  end
 
   describe "GET #index" do
     it "returns a success response" do
+
       game = Game.create! valid_attributes
-      get :index, params: {}, session: valid_session
+      get :index
 
       expect(response).to be_success
     end
@@ -55,7 +55,7 @@ RSpec.describe GamesController, type: :controller do
   describe "GET #show" do
     it "returns a success response" do
       game = Game.create! valid_attributes
-      get :show, params: {id: game.to_param}, session: valid_session, format: :json
+      get :show, params: {id: game.to_param}, format: :json
       expect(response).to be_success
     end
   end
@@ -64,14 +64,14 @@ RSpec.describe GamesController, type: :controller do
     context "with valid params" do
       it "creates a new Game" do
         expect {
-          post :create, params: {game: valid_attributes}, session: valid_session, format: :json
+          post :create, params: {game: valid_attributes}, format: :json
         }.to change(Game, :count).by(1)
       end
     end
 
     context "with invalid params" do
       it "returns a success response (i.e. to display the 'new' template)" do
-        post :create, params: {game: invalid_attributes}, session: valid_session, format: :json
+        post :create, params: {game: invalid_attributes}, format: :json
         expect(response).to be_success
       end
     end
@@ -87,7 +87,6 @@ RSpec.describe GamesController, type: :controller do
         game = Game.create! valid_attributes
         put :update,
           params: {id: game.to_param, game: new_attributes},
-          session: valid_session,
           format: :json
 
         game.reload
@@ -101,7 +100,6 @@ RSpec.describe GamesController, type: :controller do
         game = Game.create! valid_attributes
         put :update,
           params: {id: game.to_param, game: invalid_attributes},
-          session: valid_session,
           format: :json
         expect(response).to be_success
       end
@@ -112,7 +110,7 @@ RSpec.describe GamesController, type: :controller do
     it "destroys the requested game" do
       game = Game.create! valid_attributes
       expect {
-        delete :destroy, params: {id: game.to_param}, session: valid_session, format: :json
+        delete :destroy, params: {id: game.to_param}, format: :json
       }.to change(Game, :count).by(-1)
     end
   end

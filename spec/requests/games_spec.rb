@@ -1,6 +1,11 @@
 require 'rails_helper'
+require 'request_helper'
 
 RSpec.describe "Games", type: :request do
+  before do
+    login(a_user)
+  end
+
   describe "GET /games" do
     it "returns empty array" do
       get games_path, params: { format: :json }
