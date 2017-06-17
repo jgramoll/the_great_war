@@ -1,13 +1,12 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import { defaultMessages } from 'libs/i18n/default'
-import { injectIntl, intlShape } from 'react-intl';
-import { FormattedMessage } from 'react-intl';
-
 import GameRow from './GameRow'
-import css from './GameList.scss'
+import css from './index.scss'
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl'
+import { IndexLink, Link } from 'react-router'
+import { defaultMessages } from 'libs/i18n/default'
 
-const GameList = ({ games, intl, createGame }) => (
+const GameList = ({ games, intl }) => (
   <div className={css['game-list']}>
     <h1>
       {intl.formatMessage(defaultMessages.games)}
@@ -15,18 +14,15 @@ const GameList = ({ games, intl, createGame }) => (
     <ul>
       {games.map(renderGame)}
     </ul>
-    <button
-      className={css['game-list__new-game']}
-      onClick={createGame}
-    >
+    <Link
+      to="/games/new"
+      activeClassName="active"
+      className={css['game-list__new-game']
+    }>
       {intl.formatMessage(defaultMessages.newGame)}
-    </button>
+    </Link>
   </div>
 )
-
-function createGame() {
-  console.log('gamelist.createGame')
-}
 
 function renderGame(game) {
   return (
@@ -38,9 +34,9 @@ function renderGame(game) {
 }
 
 GameList.propTypes = {
-  games: PropTypes.array.isRequired,
+  //TODO game schema
+  games: PropTypes.arrayOf(PropTypes.object).isRequired,
   intl: intlShape.isRequired,
-  createGame: PropTypes.func.isRequired,
 }
 
 export default injectIntl(GameList);

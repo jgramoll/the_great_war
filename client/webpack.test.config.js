@@ -1,30 +1,30 @@
-// For inspiration on your webpack configuration, see:
-// https://github.com/shakacode/react_on_rails/tree/master/spec/dummy/client
-// https://github.com/shakacode/react-webpack-rails-tutorial/tree/master/client
+const webpack = require('webpack')
+const { resolve } = require('path')
+const ManifestPlugin = require('webpack-manifest-plugin')
+const webpackConfigLoader = require('react-on-rails/webpackConfigLoader')
 
-const webpack = require('webpack');
-const { resolve } = require('path');
+const configPath = resolve('..', 'config')
+const { manifest, webpackOutputPath, webpackPublicOutputDir }
+  = webpackConfigLoader(configPath)
 
-const ManifestPlugin = require('webpack-manifest-plugin');
-const webpackConfigLoader = require('react-on-rails/webpackConfigLoader');
-// const ExtractTextPlugin = require('extract-text-webpack-plugin');
+module.exports = {
+  entry: {
+    'webpack-bundle': [
+      'es5-shim/es5-shim',
+      'es5-shim/es5-sham',
+      'babel-polyfill',
+      './app/bundles/GameList/startup/registration',
+    ],
+  },
 
-const configPath = resolve('..', 'config');
-const { devBuild, manifest, webpackOutputPath, webpackPublicOutputDir } =
-  webpackConfigLoader(configPath);
+  output: {
+    // Name comes from the entry section.
+    filename: '[name]-[hash].js',
 
-const config = {
-
-  // context: resolve(__dirname),
-
-  // entry: {
-  //   'webpack-bundle': [
-  //     'es5-shim/es5-shim',
-  //     'es5-shim/es5-sham',
-  //     'babel-polyfill',
-  //     './app/bundles/GameList/startup/registration',
-  //   ],
-  // },
+    // Leading slash is necessary
+    publicPath: `/${webpackPublicOutputDir}`,
+    path: webpackOutputPath,
+  },
 
   resolve: {
     extensions: ['.js', '.jsx'],
@@ -33,17 +33,9 @@ const config = {
     }
   },
 
-  // plugins: [
-  //   new webpack.EnvironmentPlugin({
-  //     NODE_ENV: 'development', // use 'development' unless process.env.NODE_ENV is defined
-  //     DEBUG: false,
-  //   }),
-  //   new ManifestPlugin({ fileName: manifest, writeToFileEmit: true }),
-  //   // new ExtractTextPlugin({
-  //   //   filename: '[name]-bundle.css',
-  //   //   allChunks: true
-  //   // })
-  // ],
+  plugins: [
+    new ManifestPlugin({ fileName: manifest, writeToFileEmit: true }),
+  ],
 
   module: {
     rules: [
@@ -74,12 +66,6 @@ const config = {
               localIdentName: '[local]',
             }
           },
-          // {
-          //   loader: 'postcss-loader',
-          //   options: {
-          //     plugins: 'autoprefixer'
-          //   }
-          // },
           {
             loader: 'sass-loader'
           },
@@ -93,13 +79,4 @@ const config = {
       },
     ],
   },
-};
-
-module.exports = config;
-
-if (devBuild) {
-  console.log('Webpack dev build for Rails'); // eslint-disable-line no-console
-  module.exports.devtool = 'eval-source-map';
-} else {
-  console.log('Webpack production build for Rails'); // eslint-disable-line no-console
 }

@@ -1,23 +1,20 @@
-// import React from 'react';
-// import { Route, IndexRoute } from 'react-router';
-// import Layout from '../layout/Layout';
-// import TestReactRouter from '../components/TestReactRouter/TestReactRouter';
-// import TestReactRouterRedirect from '../components/TestReactRouterRedirect/TestReactRouterRedirect';
-// import RouterCommentsContainer from '../containers/RouterCommentsContainer';
+import React from 'react';
+import { Route, IndexRoute } from 'react-router';
+import GameListContainer from '../containers/gameListContainer'
+import NewGameContainer from '../containers/newGameContainer'
 
-// export default (
-//   <Route path="/" component={Layout}>
-//     <IndexRoute
-//       component={RouterCommentsContainer}
-//     />
-//     <Route
-//       path="react-router"
-//       component={TestReactRouter}
-//     />
-//     <Route
-//       path="react-router/redirect"
-//       component={TestReactRouterRedirect}
-//       onEnter={TestReactRouterRedirect.checkAuth}
-//     />
-//   </Route>
-// );
+export default (
+  <Route path="/">
+    <IndexRoute
+      component={GameListContainer}
+    />
+    <Route
+      path="/games"
+      component={GameListContainer}
+    />
+    <Route
+      path="/games/new"
+      component={NewGameContainer}
+    />
+  </Route>
+);

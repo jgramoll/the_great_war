@@ -1,7 +1,7 @@
 require "rails_helper"
 require "features/shared/contexts"
 
-feature "Games Index", as: :user do
+feature "Games Index", as: :user, js: true do
   context "existing games" do
     include_context "Existing Games", 2
 

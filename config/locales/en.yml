@@ -1,6 +1,8 @@
 en:
+  create: "Create"
+  name: "Name"
   games: "Games"
-  new_game: "New game"
+  new_game: "New Game"
   welcome: "Hello {name}, you have {unreadCount} {unreadCount, plural,
             one {message}
             other {messages}

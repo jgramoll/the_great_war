@@ -2,7 +2,7 @@ import Subject from '../GameRow'
 import ReactTestUtils from 'react-dom/test-utils'
 import { drill, m } from 'react-drill'
 
-describe('GameList::components::GameRow', function() {
+describe('GameList::components::GameList::GameRow', function() {
   const game = {
     name: 'Best Game'
   }

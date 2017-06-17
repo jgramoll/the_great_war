@@ -1,5 +1,5 @@
 import React from 'react'
-import Subject from '../GameList'
+import Subject from '../index'
 import ReactTestUtils from 'react-dom/test-utils'
 import { drill, m } from 'react-drill'
 

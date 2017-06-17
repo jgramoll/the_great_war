@@ -55,8 +55,10 @@ end
 group :test do
   gem "capybara"
   gem "capybara-screenshot"
+  gem "chromedriver-helper"
   gem "poltergeist"
   gem "rspec-rails"
+  gem "selenium-webdriver"
 end
 
 gem 'mini_racer', platforms: :ruby

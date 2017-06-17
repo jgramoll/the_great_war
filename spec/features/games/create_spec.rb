@@ -1,0 +1,32 @@
+require "rails_helper"
+require "features/shared/contexts"
+
+feature "Games create", as: :user, page: :new_game, js: true do
+  scenario "click create button" do
+    new_game_name = "santa"
+
+    expect(find("h1")).to have_content "New Game"
+    fill_in "Name", with: new_game_name
+    click_on "Create"
+
+    expect(find("h1")).to have_content "Games"
+    expect(page.current_path).to eq games_path
+    expect(find(".game-row")).to have_content new_game_name
+  end
+
+  scenario "press enter in name field" do
+    new_game_name = "santa"
+
+    expect(find("h1")).to have_content "New Game"
+    fill_in "Name", with: new_game_name
+    find("#name").send_keys :enter
+
+    expect(find("h1")).to have_content "Games"
+    expect(page.current_path).to eq games_path
+    expect(find(".game-row")).to have_content new_game_name
+
+  end
+
+  context "missing name" do
+  end
+end

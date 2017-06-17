@@ -1,18 +1,35 @@
 import { combineReducers } from 'redux';
-// import { GAME_LIST_NAME_UPDATE } from '../constants/gameListConstants';
+import * as actionTypes from '../constants/gameListContants';
 
-const games = (state = '', action) => {
-  // console.log('games reducer')
-  // console.log('state', state)
-  console.log('action', action)
-  switch (action.type) {
-    // case HELLO_WORLD_NAME_UPDATE:
-    //   return action.text;
-    default:
-      return state;
-  }
+export const $$initialState = {
+  $$games: [],
+  submitGameError: null,
+  isSaving: false,
 };
 
-const gameListReducer = combineReducers({ games });
+export default function gameListReducer($$state = $$initialState, action) {
+  switch (action.type) {
+    case actionTypes.SET_IS_SAVING: {
+      return Object.assign($$state, {
+        isSaving: true,
+      })
+    }
 
-export default gameListReducer;
+    case actionTypes.SUBMIT_GAME_SUCCESS: {
+      return Object.assign($$state, {
+        isSaving: false,
+        $$games: $$state.$$games.concat(action.game)
+      })
+    }
+
+    case actionTypes.SUBMIT_GAME_FAILURE: {
+      return Object.assign($$state, {
+        submitCommentError: action.error,
+        isSaving: false,
+      })
+    }
+    
+    default:
+      return $$state;
+  }
+}

@@ -1,24 +1,36 @@
-import React from 'react';
-import { Provider } from 'react-redux';
+import React from 'react'
+// import configureStore from '../store/gameListStore'
+import routes from '../routes/routes'
+import { translations } from 'libs/i18n/translations'
+import { defaultLocale } from 'libs/i18n/default'
+import { IntlProvider } from 'react-intl'
+import { Provider } from 'react-redux'
+import { Router, browserHistory } from 'react-router'
+import { syncHistoryWithStore } from 'react-router-redux'
 
-import configureStore from '../store/gameListStore';
-import GameListContainer from '../containers/gameListContainer';
+import routerStore from '../store/routerStore';
 
-import { translations } from 'libs/i18n/translations';
-import { defaultLocale } from 'libs/i18n/default';
+const locale = defaultLocale
+const messages = translations[locale]
 
-import { IntlProvider } from 'react-intl';
+const GameListApp = (props, _railsContext) => {
+  const store = routerStore(props)
 
-const locale = defaultLocale;
-// const locale = 'ru';
-const messages = translations[locale];
+  // Create an enhanced history that syncs navigation events with the store
+  const history = syncHistoryWithStore(
+    browserHistory,
+    store,
+  )
+  
+  return (
+    <IntlProvider locale={locale} key={locale} messages={messages}>
+      <Provider store={store}>
+        <Router history={history}>
+          {routes}
+        </Router>
+      </Provider>
+    </IntlProvider>
+  )
+}
 
-const GameListApp = (props, _railsContext) => (
-  <IntlProvider locale={locale} key={locale} messages={messages}>
-    <Provider store={configureStore(props)}>
-      <GameListContainer />
-    </Provider>
-  </IntlProvider>
-);
-
-export default GameListApp;
+export default GameListApp

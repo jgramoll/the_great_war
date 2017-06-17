@@ -9,6 +9,7 @@ const GameRow = ({ game }) => (
 );
 
 GameRow.propTypes = {
+  // TODO game schema
   game: PropTypes.object.isRequired,
 };
 
