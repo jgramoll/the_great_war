@@ -10,8 +10,9 @@ cache:
     - client/node_modules
 
 env:
-  - TRAVIS_NODE_VERSION="6.7"
-  - CC_TEST_REPORTER_ID=af5fe290aeddb42ab25135ac62b833f5729944e79c22354811aded1d481caaf4
+  global:
+    - CC_TEST_REPORTER_ID=af5fe290aeddb42ab25135ac62b833f5729944e79c22354811aded1d481caaf4
+    - TRAVIS_NODE_VERSION="6.7"
 
 addons:
   postgresql: "9.4"
