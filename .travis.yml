@@ -15,9 +15,10 @@ env:
 
 addons:
   - postgresql: "9.4"
-  - chrome: stable
+  - chrome: "59"
 
 before_install:
+  - google-chrome-stable -v
   - google-chrome-stable --headless --disable-gpu --no-sandbox --remote-debugging-port=9222 http://localhost
 
 install:
