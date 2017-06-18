@@ -1,4 +1,4 @@
-# The Great Ear
+# The Great War
 
 [![Build Status](https://travis-ci.org/jgramoll/the_great_war.svg?branch=master)](https://travis-ci.org/jgramoll/the_great_war)
 [![GitHub version](https://badge.fury.io/gh/jgramoll%2Fthe_great_war.svg)](https://badge.fury.io/gh/jgramoll%2Fthe_great_war)
@@ -10,7 +10,7 @@
 
 [React](https://facebook.github.io/react/) client using [React on Rails](https://github.com/shakacode/react_on_rails)
 
-[Postgres](https://www.postgresql.org/)) 9.4
+[Postgres](https://www.postgresql.org/) 9.4
 
 ## About
 
