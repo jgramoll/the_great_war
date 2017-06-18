@@ -1,11 +1,10 @@
-const webpack = require('webpack')
 const { resolve } = require('path')
 const ManifestPlugin = require('webpack-manifest-plugin')
 const webpackConfigLoader = require('react-on-rails/webpackConfigLoader')
 
 const configPath = resolve('..', 'config')
-const { manifest, webpackOutputPath, webpackPublicOutputDir }
-  = webpackConfigLoader(configPath)
+const { manifest, webpackOutputPath, webpackPublicOutputDir } =
+  webpackConfigLoader(configPath)
 
 module.exports = {
   entry: {
@@ -13,8 +12,8 @@ module.exports = {
       'es5-shim/es5-shim',
       'es5-shim/es5-sham',
       'babel-polyfill',
-      './app/bundles/GameList/startup/registration',
-    ],
+      './app/bundles/GameList/startup/registration'
+    ]
   },
 
   output: {
@@ -23,18 +22,18 @@ module.exports = {
 
     // Leading slash is necessary
     publicPath: `/${webpackPublicOutputDir}`,
-    path: webpackOutputPath,
+    path: webpackOutputPath
   },
 
   resolve: {
     extensions: ['.js', '.jsx'],
     alias: {
-      libs: resolve(__dirname, 'app/libs'),
+      libs: resolve(__dirname, 'app/libs')
     }
   },
 
   plugins: [
-    new ManifestPlugin({ fileName: manifest, writeToFileEmit: true }),
+    new ManifestPlugin({ fileName: manifest, writeToFileEmit: true })
   ],
 
   module: {
@@ -45,14 +44,14 @@ module.exports = {
           loader: 'imports-loader',
           options: {
             shim: 'es5-shim/es5-shim',
-            sham: 'es5-shim/es5-sham',
-          },
-        },
+            sham: 'es5-shim/es5-sham'
+          }
+        }
       },
       {
         test: /\.jsx?$/,
         use: 'babel-loader',
-        exclude: /node_modules/,
+        exclude: /node_modules/
       },
       {
         test: /\.scss$/,
@@ -63,7 +62,7 @@ module.exports = {
             options: {
               modules: true,
               importLoaders: 3,
-              localIdentName: '[local]',
+              localIdentName: '[local]'
             }
           },
           {
@@ -73,10 +72,10 @@ module.exports = {
             loader: 'sass-resources-loader',
             options: {
               resources: './app/assets/styles/app-variables.scss'
-            },
+            }
           }
-        ],
-      },
-    ],
-  },
+        ]
+      }
+    ]
+  }
 }
