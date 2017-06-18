@@ -15,11 +15,10 @@ env:
 
 addons:
   - postgresql: "9.4"
-  - chrome: stable
+  - chrome: beta
 
 before_install:
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
+  - google-chrome-beta --headless --disable-gpu --no-sandbox --remote-debugging-port=9222 http://localhost
 
 install:
   - bundle install
@@ -28,7 +27,6 @@ install:
   - npm install
 
 before_script:
-  - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost
   - psql -c 'create database the_great_war_test;' -U postgres
 
 script:
