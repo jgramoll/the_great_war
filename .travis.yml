@@ -6,4 +6,4 @@ addons:
   postgresql: "9.4"
 
 before_script:
-  - psql -c 'create database travis_ci_test;' -U postgres
+  - psql -c 'create database the_great_war_test;' -U postgres
