@@ -36,9 +36,9 @@ before_script:
   - psql -c 'create database the_great_war_test;' -U postgres
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
-  - ./cc-test-reporter before-build
 
 script:
+  - ./cc-test-reporter before-build
   - bundle exec rspec
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
   - cd client && yarn install && karma start --single-run && cd ..

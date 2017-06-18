@@ -37,5 +37,5 @@ group :test do
   gem 'poltergeist'
   gem 'rspec-rails'
   gem 'selenium-webdriver'
-  gem 'simplecov', :require => false
+  gem 'simplecov', require: false
 end
