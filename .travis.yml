@@ -6,12 +6,14 @@ rvm:
   - 2.3.4
 
 cache:
+  - bundler
   directories:
     - client/node_modules
 
 env:
   global:
     - CC_TEST_REPORTER_ID=af5fe290aeddb42ab25135ac62b833f5729944e79c22354811aded1d481caaf4
+    - GIT_COMMITTED_AT=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then git log -1 --pretty=format:%ct; else git log -1 --skip 1 --pretty=format:%ct; fi)
     - TRAVIS_NODE_VERSION="6.7"
 
 addons:
@@ -40,7 +42,7 @@ before_script:
 script:
   - ./cc-test-reporter before-build
   - bundle exec rspec
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+  - if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT; fi
   - cd client && yarn install && karma start --single-run && cd ..
 
 after_success:
