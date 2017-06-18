@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "postinstall": "cd client && yarn install"
+    "postinstall": "cd client && yarn install",
+    "coveralls": "cd client && cat ./coverage/lcov.info | ./node_modules/.bin/coveralls"
   },
   "name": "the_great_war",
   "private": true,

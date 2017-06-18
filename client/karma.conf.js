@@ -25,7 +25,7 @@ module.exports = function (config) {
 
     reporters: [ 'progress', 'coverage-istanbul' ],
     coverageIstanbulReporter: {
-      reports: ['html', 'text-summary'],
+      reports: ['html', 'lcov', 'text-summary'],
       fixWebpackSourcePaths: true,
 
       thresholds: {
