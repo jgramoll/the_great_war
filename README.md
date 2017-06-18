@@ -1,24 +1,19 @@
-# README
+# The Great Ear
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+[![Build Status](https://travis-ci.org/jgramoll/the_great_war.svg?branch=master)](https://travis-ci.org/jgramoll/the_great_war)
+[![GitHub version](https://badge.fury.io/gh/jgramoll%2Fthe_great_war.svg)](https://badge.fury.io/gh/jgramoll%2Fthe_great_war)
+[![Code Climate](https://codeclimate.com/github/jgramoll/the_great_war/badges/gpa.svg)](https://codeclimate.com/github/jgramoll/the_great_war)
 
-Things you may want to cover:
+## Technologies
 
-* Ruby version
+[Rails](http://rubyonrails.org/) 5.1 server
 
-* System dependencies
+[React](https://facebook.github.io/react/) client using [React on Rails](https://github.com/shakacode/react_on_rails)
 
-* Configuration
+[Postgres](https://www.postgresql.org/)) 9.4
 
-* Database creation
+## About
 
-* Database initialization
+Framework for games. The initial game will be a war game based on WW1.
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Currently running on [AWS Elastic Beanstalk](https://aws.amazon.com/elasticbeanstalk/)
