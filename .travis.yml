@@ -3,7 +3,7 @@ rvm:
   - 2.3.4
 
 env:
-  - TRAVIS_NODE_VERSION="4"
+  - TRAVIS_NODE_VERSION="6.7"
 
 install:
 addons:
@@ -12,12 +12,12 @@ addons:
 install:
   - bundle install
   - rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`) && source ~/.nvm/nvm.sh && nvm install $TRAVIS_NODE_VERSION
-  - npm install
   - npm install -g yarn
+  - npm install
 
 before_script:
   - psql -c 'create database the_great_war_test;' -U postgres
 
 script:
-  - npm test
   - bundle exec rspec
+  - cd client && karma start --single-run && cd ..
