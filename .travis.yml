@@ -6,7 +6,7 @@ rvm:
   - 2.3.4
 
 cache:
-  - bundler
+  bundler: true
   directories:
     - client/node_modules
 
