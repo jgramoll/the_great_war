@@ -8,23 +8,23 @@ rvm:
 cache:
   - bundler
   - yarn
+  directories:
+    - client/node_modules
 
 env:
   global:
     - TRAVIS_NODE_VERSION="6.7"
-    - CHROME_BIN=/usr/bin/google-chrome
     - DISPLAY=:99.0
 
 addons:
   - postgresql: "9.4"
-  - chrome: stable
+  - chrome: "58.0.3029.0"
 
 before_install:
   - sh -e /etc/init.d/xvfb start
 
 install:
   - bundle install
-  - chromedriver-update
   - rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`) && source ~/.nvm/nvm.sh && nvm install $TRAVIS_NODE_VERSION
   - npm install -g yarn
   - npm install
