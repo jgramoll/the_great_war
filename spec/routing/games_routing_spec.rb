@@ -63,11 +63,11 @@ RSpec.describe GamesController, type: :routing do
     end
   end
 
-  # it 'does route to #new' do
-  #   expect(get: '/games/new').to route_to('games#new', format: 'json')
-  # end
+  it 'does route to #new' do
+    expect(get: '/games/new').to route_to('games#new')
+  end
 
-  # it 'does not route to #edit' do
-  #   expect(get: '/games/1/edit').to_not be_routable
-  # end
+  it 'does not route to #edit' do
+    expect(get: '/games/1/edit').to_not be_routable
+  end
 end

@@ -13,10 +13,8 @@
 !/log/.keep
 !/tmp/.keep
 
-/node_modules
 /yarn-error.log
 
-.byebug_history
 # React on Rails
 npm-debug.log*
 node_modules
@@ -24,9 +22,11 @@ node_modules
 # Generated js bundles
 /public/webpack/*
 /client/app/libs/i18n/*
-/client/coverage/*
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
+
+# code coverage results
+coverage
