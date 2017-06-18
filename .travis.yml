@@ -5,6 +5,10 @@ language: ruby
 rvm:
   - 2.3.4
 
+cache:
+  - bundler
+  - yarn
+
 env:
   global:
     - TRAVIS_NODE_VERSION="6.7"
@@ -13,7 +17,7 @@ env:
 
 addons:
   - postgresql: "9.4"
-  - chrome: stable
+  - chrome: "58"
 
 before_install:
   - sh -e /etc/init.d/xvfb start
