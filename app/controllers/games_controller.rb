@@ -1,5 +1,6 @@
+# controller for games
 class GamesController < ApplicationController
-  before_action :set_game, only: [:show, :edit, :update, :destroy]
+  before_action :set_game, only: %i[show edit update destroy]
   before_action :authenticate_user!
 
   # GET /games
@@ -14,8 +15,7 @@ class GamesController < ApplicationController
   end
 
   # GET /games/1.json
-  def show
-  end
+  def show; end
 
   # POST /games.json
   def create
@@ -50,13 +50,15 @@ class GamesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_game
-      @game = Game.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def game_params
-      params.fetch(:game, {}).permit(:name)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_game
+    @game = Game.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet,
+  # only allow the white list through.
+  def game_params
+    params.fetch(:game, {}).permit(:name)
+  end
 end

@@ -1,7 +1,7 @@
 def login(user)
   post user_session_path, params: { user: {
     email: user.email,
-    password: user.password,
-  }}
+    password: user.password
+  } }
   follow_redirect!
 end
