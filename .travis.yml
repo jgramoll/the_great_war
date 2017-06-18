@@ -15,10 +15,10 @@ env:
 
 addons:
   - postgresql: "9.4"
-  - google-chrome-beta
+  - chrome: stable
 
 before_install:
-  - google-chrome-beta --headless --disable-gpu --no-sandbox --remote-debugging-port=9222 http://localhost
+  - google-chrome-stable --headless --disable-gpu --no-sandbox --remote-debugging-port=9222 http://localhost
 
 install:
   - bundle install
