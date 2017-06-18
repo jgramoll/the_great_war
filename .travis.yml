@@ -5,5 +5,8 @@ rvm:
 addons:
   postgresql: "9.4"
 
+install:
+  - npm install -g yarn
+
 before_script:
   - psql -c 'create database the_great_war_test;' -U postgres
