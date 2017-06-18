@@ -1,7 +1,7 @@
-const webpackConfig = require('./webpack.karma.config');
+const webpackConfig = require('./webpack.karma.config')
 
 const files = 'app/**/components/**/*.jsx'
-module.exports = function(config) {
+module.exports = function (config) {
   config.set({
     frameworks: ['intl-shim', 'mocha', 'chai'],
 
@@ -12,31 +12,31 @@ module.exports = function(config) {
     webpack: webpackConfig,
 
     webpackMiddleware: {
-        stats: 'errors-only'
+      stats: 'errors-only'
     },
 
     webpackServer: {
-        noInfo: true
+      noInfo: true
     },
 
     preprocessors: {
-      [files]: ['webpack', 'sourcemap'],
+      [files]: ['webpack', 'sourcemap']
     },
 
     reporters: [ 'progress', 'coverage-istanbul' ],
     coverageIstanbulReporter: {
-        reports: ['html', 'text-summary'],
-        fixWebpackSourcePaths: true,
+      reports: ['html', 'text-summary'],
+      fixWebpackSourcePaths: true,
 
-        thresholds: {
-          emitWarning: false,
-          global: {
-            statements: 100,
-            lines: 100,
-            branches: 100,
-            functions: 100
-          }
+      thresholds: {
+        emitWarning: false,
+        global: {
+          statements: 100,
+          lines: 100,
+          branches: 100,
+          functions: 100
         }
+      }
     },
 
     port: 9876,

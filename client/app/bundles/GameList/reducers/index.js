@@ -1,9 +1,9 @@
-import gameListReducer, { $$initialState as $$gamesState } from './gameListReducer';
+import gameListReducer, { $$initialState as $$gamesState } from './gameListReducer'
 
 export default {
-  $$gamesStore: gameListReducer,
-};
+  $$gamesStore: gameListReducer
+}
 
 export const initialStates = {
-  $$gamesState,
-};
+  $$gamesState
+}
