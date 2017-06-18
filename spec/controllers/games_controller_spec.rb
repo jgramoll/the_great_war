@@ -9,7 +9,7 @@ RSpec.describe GamesController, type: :controller do
   let(:invalid_attributes) {
     {
       id: '-1',
-      name: 'test',
+      name: nil,
       wrong_field: 'a'
     } }
 
@@ -43,9 +43,9 @@ RSpec.describe GamesController, type: :controller do
     end
 
     context 'with invalid params' do
-      it "returns a success response (i.e. to display the 'new' template)" do
+      it "returns a failure response" do
         post :create, params: { game: invalid_attributes }, format: :json
-        expect(response).to be_success
+        expect(response).to have_http_status(:unprocessable_entity)
       end
     end
   end
@@ -70,12 +70,12 @@ RSpec.describe GamesController, type: :controller do
     end
 
     context 'with invalid params' do
-      it "returns a success response (i.e. to display the 'edit' template)" do
+      it "returns a failure response" do
         game = Game.create! valid_attributes
         put :update,
             params: { id: game.to_param, game: invalid_attributes },
             format: :json
-        expect(response).to be_success
+        expect(response).to have_http_status(:unprocessable_entity)
       end
     end
   end

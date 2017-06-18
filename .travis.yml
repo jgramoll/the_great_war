@@ -10,7 +10,9 @@ cache:
     - client/node_modules
 
 env:
-  - TRAVIS_NODE_VERSION="6.7"
+  global:
+    - CC_TEST_REPORTER_ID=af5fe290aeddb42ab25135ac62b833f5729944e79c22354811aded1d481caaf4
+    - TRAVIS_NODE_VERSION="6.7"
 
 addons:
   postgresql: "9.4"
@@ -32,9 +34,13 @@ install:
 
 before_script:
   - psql -c 'create database the_great_war_test;' -U postgres
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
 
 script:
+  - ./cc-test-reporter before-build
   - bundle exec rspec
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
   - cd client && yarn install && karma start --single-run && cd ..
 
 after_success:
