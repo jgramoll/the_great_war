@@ -1,7 +1,3 @@
-// For inspiration on your webpack configuration, see:
-// https://github.com/shakacode/react_on_rails/tree/master/spec/dummy/client
-// https://github.com/shakacode/react-webpack-rails-tutorial/tree/master/client
-
 const webpack = require('webpack')
 const { resolve } = require('path')
 
@@ -9,11 +5,10 @@ const ManifestPlugin = require('webpack-manifest-plugin')
 const webpackConfigLoader = require('react-on-rails/webpackConfigLoader')
 
 const configPath = resolve('..', 'config')
-const { devBuild, manifest, webpackOutputPath, webpackPublicOutputDir } =
+const { manifest, webpackOutputPath, webpackPublicOutputDir } =
   webpackConfigLoader(configPath)
 
 const config = {
-
   context: resolve(__dirname),
 
   entry: {
@@ -42,11 +37,11 @@ const config = {
   },
 
   plugins: [
+    new ManifestPlugin({ fileName: manifest, writeToFileEmit: true }),
     new webpack.EnvironmentPlugin({
       NODE_ENV: 'development', // use 'development' unless process.env.NODE_ENV is defined
       DEBUG: false
-    }),
-    new ManifestPlugin({ fileName: manifest, writeToFileEmit: true })
+    })
   ],
 
   module: {
@@ -75,7 +70,6 @@ const config = {
             options: {
               modules: true,
               importLoaders: 3
-              // localIdentName: '[name]__[local]__[hash:base64:5]'
             }
           },
           {
@@ -94,10 +88,3 @@ const config = {
 }
 
 module.exports = config
-
-if (devBuild) {
-  console.log('Webpack dev build for Rails') // eslint-disable-line no-console
-  module.exports.devtool = 'eval-source-map'
-} else {
-  console.log('Webpack production build for Rails') // eslint-disable-line no-console
-}
