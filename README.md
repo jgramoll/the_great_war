@@ -5,6 +5,7 @@
 [![Code Climate](https://codeclimate.com/github/jgramoll/the_great_war/badges/gpa.svg)](https://codeclimate.com/github/jgramoll/the_great_war)
 [![Coverage Status](https://coveralls.io/repos/github/jgramoll/the_great_war/badge.svg?branch=master)](https://coveralls.io/github/jgramoll/the_great_war?branch=master)
 [![Test Coverage](https://codeclimate.com/github/jgramoll/the_great_war/badges/coverage.svg)](https://codeclimate.com/github/jgramoll/the_great_war/coverage)
+[![Dependency Status](https://gemnasium.com/jgramoll/the_great_war.svg)](https://gemnasium.com/jgramoll/the_great_war)
 
 ## Technologies
 
