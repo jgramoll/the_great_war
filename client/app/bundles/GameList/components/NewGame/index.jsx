@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import createReactClass from 'create-react-class'
 import { injectIntl, intlShape } from 'react-intl'
 import { Link } from 'react-router'
 import { defaultMessages } from 'libs/i18n/default'
 
-const NewGame = React.createClass({
+const NewGame = createReactClass({
   render() {
     const { intl, submitGameError } = this.props
     return (
