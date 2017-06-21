@@ -5,8 +5,11 @@ language: ruby
 rvm:
   - 2.3.4
 
+install:
+  - echo install
+
 script:
-  - echo hi
+  - echo script
 
 deploy:
   provider: elasticbeanstalk
