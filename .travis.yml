@@ -5,49 +5,6 @@ language: ruby
 rvm:
   - 2.3.4
 
-cache:
-  bundler: true
-  directories:
-    - client/node_modules
-
-env:
-  global:
-    - CC_TEST_REPORTER_ID=af5fe290aeddb42ab25135ac62b833f5729944e79c22354811aded1d481caaf4
-    - GIT_COMMITTED_AT=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then git log -1 --pretty=format:%ct; else git log -1 --skip 1 --pretty=format:%ct; fi)
-    - TRAVIS_NODE_VERSION="6.7"
-
-addons:
-  postgresql: '9.4'
-  apt:
-    sources:
-      - google-chrome
-    packages:
-      - google-chrome-stable
-
-before_install:
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
-
-install:
-  - bundle install
-  - rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`) && source ~/.nvm/nvm.sh && nvm install $TRAVIS_NODE_VERSION
-  - npm install -g yarn
-  - npm install
-
-before_script:
-  - psql -c 'create database the_great_war_test;' -U postgres
-  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-  - chmod +x ./cc-test-reporter
-
-script:
-  - "./cc-test-reporter before-build"
-  - bundle exec rspec
-  - if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT; fi
-  - cd client && yarn install && karma start --single-run && cd ..
-
-after_success:
-  - yarn run coveralls
-
 deploy:
   provider: elasticbeanstalk
   access_key_id: $AWS_ACCESS_KEY_ID
