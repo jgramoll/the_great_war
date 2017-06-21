@@ -33,7 +33,7 @@
     "promise-polyfill": "^6.0.2",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
-    "react-drill": "^2.2.1",
+    "react-drill": "^2.3.0",
     "react-intl": "^2.3.0",
     "react-on-rails": "8.0.0",
     "react-redux": "^5.0.4",
