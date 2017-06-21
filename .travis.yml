@@ -58,5 +58,5 @@ deploy:
   env: staging
   bucket_name: elasticbeanstalk-us-west-2-759440491579
   on:
-    branch: aws_deploy
+    all_branches: true
     repo: jgramoll/the_great_war
