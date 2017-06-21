@@ -5,6 +5,9 @@ language: ruby
 rvm:
   - 2.3.4
 
+script:
+  - echo hi
+
 deploy:
   provider: elasticbeanstalk
   access_key_id: $AWS_ACCESS_KEY_ID
