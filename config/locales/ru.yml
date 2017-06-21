@@ -1,8 +1,11 @@
 ru:
+  something_went_wrong: "ой, что-то пошло не так"
+  create: "Создайте"
+  name: "название"
   games: "Игры"
   new_game: "новая игра"
+  missing_name: "Отсутствует название"
   welcome: "приветствие {name}, у вас есть {unreadCount} {unreadCount, plural,
             one {сообщение}
             other {Сообщения}
           }"
-  

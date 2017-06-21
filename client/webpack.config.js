@@ -37,11 +37,8 @@ const config = {
   },
 
   plugins: [
-    new ManifestPlugin({ fileName: manifest, writeToFileEmit: true }),
-    new webpack.EnvironmentPlugin({
-      NODE_ENV: 'development', // use 'development' unless process.env.NODE_ENV is defined
-      DEBUG: false
-    })
+    new webpack.ProvidePlugin({ 'Promise': 'promise-polyfill' }),
+    new ManifestPlugin({ fileName: manifest, writeToFileEmit: true })
   ],
 
   module: {

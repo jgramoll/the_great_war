@@ -27,5 +27,12 @@ feature 'Games create', as: :user, page: :new_game, js: true do
   end
 
   context 'missing name' do
+    scenario 'displays missing name' do
+      expect(find('h1')).to have_content 'New Game'
+      click_on 'Create'
+
+      expect(find('.create-game-error')).to have_content 'Missing name'
+      expect(page.current_path).to eq new_game_path
+    end
   end
 end

@@ -1,6 +1,7 @@
+import * as actionTypes from '../constants/gameListContants'
 import requestsManager from 'libs/requestsManager'
 import { push } from 'react-router-redux'
-import * as actionTypes from '../constants/gameListContants';
+import { defaultMessages } from 'libs/i18n/default'
 
 export function setIsSaving() {
   return {
@@ -22,7 +23,7 @@ export function submitGameFailure(error) {
   };
 }
 
-export function createGame(game) {
+export function createGame(game, intl) {
   return (dispatch) => {
     dispatch(setIsSaving());
     return requestsManager.post('/games.json', { game })
@@ -30,6 +31,9 @@ export function createGame(game) {
         dispatch(submitGameSuccess(game))
         dispatch(push('/games'))
       })
-      .catch(error => dispatch(submitGameFailure(error)))
+      .catch(_error => {
+        const message = intl.formatMessage(defaultMessages.somethingWentWrong)
+        dispatch(submitGameFailure(message))
+      })
   }
 }
