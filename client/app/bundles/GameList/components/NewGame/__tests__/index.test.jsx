@@ -1,42 +1,51 @@
 import React from 'react'
 import Subject from '../index'
+import sinon from 'sinon'
 import ReactTestUtils from 'react-dom/test-utils'
 import { drill, m } from 'react-drill'
-import sinon from 'sinon'
-
-import {
-    IntlProvider,
-} from 'react-intl';
+import { IntlProvider } from 'react-intl'
+import { defaultMessages } from 'libs/i18n/default'
 
 describe('NewGame::components::NewGame', function() {
   const intlProvider = new IntlProvider({locale: 'en'});
   const { intl } = intlProvider.getChildContext();
-
-  const subject = ReactTestUtils.renderIntoDocument(
-    <Subject.WrappedComponent
-      intl={intl}
-      createGame={sinon.stub()}
-    />
-  )
+  
+  function renderSubject(props) {
+    return ReactTestUtils.renderIntoDocument(
+      <Subject.WrappedComponent
+        intl={intl}
+        createGame={sinon.stub()}
+        submitGameFailure={sinon.stub()}
+        {...props}
+      />
+    )
+  }
 
   describe('submit form', function() {
     it('calls createGame with name', function() {
-      drill(subject).find('#name').fillIn('poo')
-      drill(subject).find('input[type="submit"]').click()
-      expect(subject.props.createGame.called).to.be.true
+      const subject = renderSubject()
 
-      drill(subject).find('#name').fillIn('')
+      const name = 'Best eva'
+      drill(subject).find('#name').fillIn(name)
+      drill(subject).find('input[type="submit"]').click()
+      sinon.assert.calledWith(subject.props.createGame, { name })
     })
 
     context('no name', function() {
-      it('renders error', function() {
+      it('calls error function', function() {
+        const subject = renderSubject()
+
         drill(subject).find('input[type="submit"]').click()
+        expect(subject.props.submitGameFailure.called).to.be.true
       })
     })
 
-    context('failure', function() {
+    context('error', function() {
       it('renders error', function() {
+        const submitGameError = 'missing name'
+        const subject = renderSubject({submitGameError})
 
+        expect(drill(subject).has('div', m.hasText(submitGameError))).to.be.true
       })
     })
   })

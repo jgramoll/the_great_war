@@ -1,13 +1,15 @@
 const webpackConfig = require('./webpack.karma.config')
 
-const files = 'app/**/components/**/*.jsx'
+const files = [
+  'app/**/components/**/*.jsx',
+  'app/**/reducers/**/*.jsx',
+  'app/**/actions/**/*.jsx'
+]
 module.exports = function (config) {
   config.set({
     frameworks: ['intl-shim', 'mocha', 'chai'],
 
-    files: [
-      {pattern: files, watched: false}
-    ],
+    files: files.map(f => { return {pattern: f, watched: false} }),
 
     webpack: webpackConfig,
 
@@ -19,9 +21,10 @@ module.exports = function (config) {
       noInfo: true
     },
 
-    preprocessors: {
-      [files]: ['webpack', 'sourcemap']
-    },
+    preprocessors: files.reduce((hash, filename) => {
+      hash[filename] = ['webpack', 'sourcemap']
+      return hash
+    }, {}),
 
     reporters: [ 'progress', 'coverage-istanbul' ],
     coverageIstanbulReporter: {

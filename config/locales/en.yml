@@ -1,8 +1,10 @@
 en:
+  something_went_wrong: "Oops, something went wrong"
   create: "Create"
   name: "Name"
   games: "Games"
   new_game: "New Game"
+  missing_name: "Missing name"
   welcome: "Hello {name}, you have {unreadCount} {unreadCount, plural,
             one {message}
             other {messages}

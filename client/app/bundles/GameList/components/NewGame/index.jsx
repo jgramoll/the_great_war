@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import createReactClass from 'create-react-class'
+import css from './index.scss'
 import { injectIntl, intlShape } from 'react-intl'
 import { Link } from 'react-router'
 import { defaultMessages } from 'libs/i18n/default'
@@ -14,7 +15,7 @@ const NewGame = createReactClass({
           <Link to="/games">
             {intl.formatMessage(defaultMessages.games)}
           </Link>
-          <div>
+          <div className={css['create-game-error']}>
             {submitGameError}
           </div>
         </header>
@@ -35,12 +36,15 @@ const NewGame = createReactClass({
   },
 
   _submitCreateGame(e) {
+    const { intl, createGame, submitGameFailure } = this.props
     e.preventDefault()
+
     const name = this.name.value
     if (name) {
-      this.props.createGame({name})
+      createGame({name})
     } else {
-      console.error('no name')
+      const error = intl.formatMessage(defaultMessages.missingName)
+      submitGameFailure(error)
     }
   }
 })
@@ -49,6 +53,7 @@ NewGame.propTypes = {
   intl: intlShape.isRequired,
   submitGameError: PropTypes.string,
   createGame: PropTypes.func.isRequired,
+  submitGameFailure: PropTypes.func.isRequired,
 }
 
 export default injectIntl(NewGame)
