@@ -14,12 +14,13 @@ script:
 
 deploy:
   provider: elasticbeanstalk
-  access_key_id: $AWS_ACCESS_KEY_ID
-  secret_access_key: $AWS_SECRET_ACCESS_KEY
+  access_key_id: "$AWS_ACCESS_KEY_ID"
+  secret_access_key: "$AWS_SECRET_ACCESS_KEY"
   region: us-west-2
   app: the_great_war
   env: staging
   bucket_name: elasticbeanstalk-us-west-2-759440491579
+  only_create_app_version: "true"
   on:
     all_branches: true
     repo: jgramoll/the_great_war
