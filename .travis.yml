@@ -56,5 +56,5 @@ deploy:
   bucket_name: elasticbeanstalk-us-west-2-759440491579
   only_create_app_version: "true"
   on:
-    all_branches: true
+    branch: master
     repo: jgramoll/the_great_war
