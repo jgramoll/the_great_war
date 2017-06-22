@@ -43,7 +43,7 @@ script:
   - ./cc-test-reporter before-build
   - bundle exec rspec
   - if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT; fi
-  - cd client && yarn install && ./node_modules/.bin/karma start --single-run && cd ..
+  - yarn run test
 
 after_success:
   - 'yarn run coveralls'

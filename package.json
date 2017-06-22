@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "postinstall": "cd client && yarn install",
+    "test": "cd client && yarn install && ./node_modules/.bin/karma start --single-run",
     "coveralls": "cd client && cat ./coverage/lcov.info | ./node_modules/.bin/coveralls"
   },
   "name": "the_great_war",
