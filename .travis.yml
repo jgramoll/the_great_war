@@ -7,6 +7,8 @@ rvm:
 
 cache:
   bundler: true
+  directories:
+    - client/node_modules
 
 env:
   global:
@@ -41,7 +43,7 @@ script:
   - ./cc-test-reporter before-build
   - bundle exec rspec
   - if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT; fi
-  - cd client && yarn install && karma start --single-run && cd ..
+  - cd client && yarn install && ./node_modules/.bin/karma start --single-run && cd ..
 
 after_success:
   - 'yarn run coveralls'
