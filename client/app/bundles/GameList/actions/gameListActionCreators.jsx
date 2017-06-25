@@ -3,29 +3,29 @@ import requestsManager from 'libs/requestsManager'
 import { push } from 'react-router-redux'
 import { defaultMessages } from 'libs/i18n/default'
 
-export function setIsSaving() {
+export function setIsSaving () {
   return {
-    type: actionTypes.SET_IS_SAVING,
-  };
+    type: actionTypes.SET_IS_SAVING
+  }
 }
 
-export function submitGameSuccess(game) {
+export function submitGameSuccess (game) {
   return {
     type: actionTypes.SUBMIT_GAME_SUCCESS,
-    game,
-  };
+    game
+  }
 }
 
-export function submitGameFailure(error) {
+export function submitGameFailure (error) {
   return {
     type: actionTypes.SUBMIT_GAME_FAILURE,
-    error,
-  };
+    error
+  }
 }
 
-export function createGame(game, intl) {
+export function createGame (game, intl) {
   return (dispatch) => {
-    dispatch(setIsSaving());
+    dispatch(setIsSaving())
     return requestsManager.post('/games.json', { game })
       .then(game => {
         dispatch(submitGameSuccess(game))

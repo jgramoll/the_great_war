@@ -3,7 +3,9 @@ require 'rails_helper'
 RSpec.describe GamesController, type: :controller do
   let(:valid_attributes) {
     {
-      name: 'game_name'
+      name: 'game_name',
+      game_type: 'demo',
+      host: a_user,
     } }
 
   let(:invalid_attributes) {

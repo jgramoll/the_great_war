@@ -1,25 +1,24 @@
-import { applyMiddleware, compose, createStore, combineReducers } from 'redux'
-import { routerMiddleware, routerReducer } from 'react-router-redux'
+import reducers, { initialStates } from '../reducers'
 import thunkMiddleware from 'redux-thunk'
-
+import { camelizeKeys } from 'humps'
+import { applyMiddleware, createStore, combineReducers } from 'redux'
+import { routerMiddleware, routerReducer } from 'react-router-redux'
 import { browserHistory } from 'react-router'
 
-import reducers, { initialStates } from '../reducers';
-
 export default (props, _railsContext) => {
-  const initialGames = props.games;
-  const { $$gamesState } = initialStates;
+  const initialGames = props.games
+  const { $$gamesState } = initialStates
 
   const initialState = {
     $$gamesStore: Object.assign($$gamesState, {
-      $$games: initialGames,
+      $$games: camelizeKeys(initialGames)
     })
   }
 
   // https://github.com/reactjs/react-router-redux
   const reducer = combineReducers({
     ...reducers,
-    routing: routerReducer,
+    routing: routerReducer
   })
 
   const middleware = routerMiddleware(browserHistory)
@@ -28,6 +27,6 @@ export default (props, _railsContext) => {
   const finalCreateStore = applyMiddleware(
     thunkMiddleware,
     middleware
-  )(createStore);
+  )(createStore)
   return finalCreateStore(reducer, initialState)
 }

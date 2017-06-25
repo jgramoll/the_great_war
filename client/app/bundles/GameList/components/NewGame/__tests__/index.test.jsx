@@ -4,13 +4,12 @@ import sinon from 'sinon'
 import ReactTestUtils from 'react-dom/test-utils'
 import { drill, m } from 'react-drill'
 import { IntlProvider } from 'react-intl'
-import { defaultMessages } from 'libs/i18n/default'
 
-describe('NewGame::components::NewGame', function() {
-  const intlProvider = new IntlProvider({locale: 'en'});
-  const { intl } = intlProvider.getChildContext();
-  
-  function renderSubject(props) {
+describe('NewGame::components::NewGame', function () {
+  const intlProvider = new IntlProvider({locale: 'en'})
+  const { intl } = intlProvider.getChildContext()
+
+  function renderSubject (props) {
     return ReactTestUtils.renderIntoDocument(
       <Subject.WrappedComponent
         intl={intl}
@@ -21,18 +20,18 @@ describe('NewGame::components::NewGame', function() {
     )
   }
 
-  describe('submit form', function() {
-    it('calls createGame with name', function() {
+  describe('submit form', function () {
+    it('calls createGame with name', function () {
       const subject = renderSubject()
 
       const name = 'Best eva'
       drill(subject).find('#name').fillIn(name)
       drill(subject).find('input[type="submit"]').click()
-      sinon.assert.calledWith(subject.props.createGame, { name })
+      sinon.assert.calledWith(subject.props.createGame, { name, gameType: 'demo' })
     })
 
-    context('no name', function() {
-      it('calls error function', function() {
+    context('no name', function () {
+      it('calls error function', function () {
         const subject = renderSubject()
 
         drill(subject).find('input[type="submit"]').click()
@@ -40,8 +39,8 @@ describe('NewGame::components::NewGame', function() {
       })
     })
 
-    context('error', function() {
-      it('renders error', function() {
+    context('error', function () {
+      it('renders error', function () {
         const submitGameError = 'missing name'
         const subject = renderSubject({submitGameError})
 

@@ -1,7 +1,6 @@
-import React from 'react'
-import NewGame from '../components/NewGame';
+import NewGame from '../components/NewGame'
 import { connect } from 'react-redux'
-import * as actions from '../actions/gameListActionCreators';
+import * as actions from '../actions/gameListActionCreators'
 
 const mapStateToProps = (state) => {
   return { submitGameError: state.$$gamesStore.submitGameError }

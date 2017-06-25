@@ -3,7 +3,8 @@ const webpackConfig = require('./webpack.karma.config')
 const files = [
   'app/**/components/**/*.jsx',
   'app/**/reducers/**/*.jsx',
-  'app/**/actions/**/*.jsx'
+  'app/**/actions/**/*.jsx',
+  'app/libs/!(i18n)/**/*.js'
 ]
 module.exports = function (config) {
   config.set({

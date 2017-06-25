@@ -20,6 +20,7 @@ gem 'webpacker_lite'
 
 group :development, :test do
   gem 'pry'
+  gem 'pry-nav'
   gem 'rubocop', '~> 0.49.1', require: false
 end
 

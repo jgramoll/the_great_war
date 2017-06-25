@@ -4,7 +4,7 @@ const baseConfig = require('./webpack.config')
 
 baseConfig.module.rules.unshift({
   test: /^(?!.*test\.jsx?$).*\.jsx?$/i,
-  include: resolve('app/bundle'),
+  include: resolve('app'),
   loader: 'istanbul-instrumenter-loader'
 })
 

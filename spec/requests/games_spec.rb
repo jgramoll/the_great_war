@@ -16,13 +16,9 @@ RSpec.describe 'Games', type: :request do
     end
 
     context 'games exist' do
-      let(:game) { a_game }
-      let(:game_2) { a_game }
-
-      before do
-        game
-        game_2
-      end
+      let(:host) { a_user }
+      let!(:game) { a_game(host: host, created_at: 1.day.ago) }
+      let!(:game_2) { a_game(host: host, created_at: 2.day.ago) }
 
       it 'returns game array' do
         get games_path, params: { format: :json }
@@ -30,7 +26,7 @@ RSpec.describe 'Games', type: :request do
 
         json = JSON.parse(response.body, symbolize_names: true)
         expect(json[:games].count).to eq(2)
-        expect(json[:games].map { |g| g[:id] })
+        expect(json[:games].map { |g| g[:id].to_i })
           .to eq([game.id, game_2.id])
       end
     end
@@ -42,7 +38,8 @@ RSpec.describe 'Games', type: :request do
         post games_path, params: {
           format: :json,
           game: {
-            name: 'test'
+            name: 'test',
+            game_type: 'demo'
           }
         }
       }.to change {

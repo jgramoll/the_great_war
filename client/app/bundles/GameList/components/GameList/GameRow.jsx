@@ -1,16 +1,15 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import css from './GameRow.scss';
+import React from 'react'
+import css from './GameRow.scss'
+import gameSchema from '../../schemas/game'
 
 const GameRow = ({ game }) => (
   <li className={css['game-row']}>
-    <h2 className={css['game-row__title']}>{game.name}</h2>
+    <h2 className={css['game-row__title']}>({game.gameType}) {game.name}</h2>
   </li>
-);
+)
 
 GameRow.propTypes = {
-  // TODO game schema
-  game: PropTypes.object.isRequired,
-};
+  game: gameSchema.isRequired
+}
 
-export default GameRow;
+export default GameRow

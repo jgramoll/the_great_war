@@ -6,7 +6,7 @@ class GamesController < ApplicationController
   # GET /games
   # GET /games.json
   def index
-    @games = Game.all
+    @games = Game.all.order(created_at: :desc)
   end
 
   # GET /comments/new
@@ -19,7 +19,7 @@ class GamesController < ApplicationController
 
   # POST /games.json
   def create
-    @game = Game.new(game_params)
+    @game = Game.new(game_params.merge(host: current_user))
 
     respond_to do |format|
       if @game.save
@@ -59,6 +59,6 @@ class GamesController < ApplicationController
   # Never trust parameters from the scary internet,
   # only allow the white list through.
   def game_params
-    params.fetch(:game, {}).permit(:name)
+    params.fetch(:game, {}).permit(:name, :game_type)
   end
 end

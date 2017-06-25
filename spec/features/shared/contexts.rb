@@ -14,7 +14,10 @@ end
 
 # Fixtures
 shared_context 'Existing Games' do |existing_games|
-  before { existing_games.times { a_game } }
+  before do
+    host = a_user
+    existing_games.times { a_game(host: host) }
+  end
 end
 
 RSpec.configure do |rspec|

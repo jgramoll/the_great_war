@@ -3,5 +3,6 @@
 class Game < ApplicationRecord
   validates :name, presence: true
 
+  belongs_to :host, class_name: 'User'
   has_many :game_states
 end
