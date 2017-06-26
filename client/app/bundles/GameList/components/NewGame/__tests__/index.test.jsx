@@ -5,7 +5,7 @@ import ReactTestUtils from 'react-dom/test-utils'
 import { drill, m } from 'react-drill'
 import { IntlProvider } from 'react-intl'
 
-describe('NewGame::components::NewGame', function () {
+describe('GameList::components::NewGame', function () {
   const intlProvider = new IntlProvider({locale: 'en'})
   const { intl } = intlProvider.getChildContext()
 

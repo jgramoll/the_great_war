@@ -1,3 +1,4 @@
+import React from 'react'
 import Subject from '../index'
 import ReactTestUtils from 'react-dom/test-utils'
 import { drill } from 'react-drill'
@@ -25,7 +26,11 @@ describe('GameList::components::GameList', function () {
   const { intl } = intlProvider.getChildContext()
 
   const subject = ReactTestUtils.renderIntoDocument(
-    Subject.WrappedComponent({games, intl})
+    <Subject.WrappedComponent
+      intl={intl}
+      games={games}
+      selectGame={Function.prototype}
+    />
   )
 
   it('renders game rows', function () {

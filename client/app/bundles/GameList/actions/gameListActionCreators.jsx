@@ -23,6 +23,13 @@ export function submitGameFailure (error) {
   }
 }
 
+export function selectGame (game) {
+  return {
+    type: actionTypes.SELECT_GAME,
+    game
+  }
+}
+
 export function createGame (game, intl) {
   return (dispatch) => {
     dispatch(setIsSaving())

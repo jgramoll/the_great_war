@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   
   devise_for :users
 
-  resources :games, only: [:index, :new]
-  resources :games, only: [:create, :update, :show, :destroy],
+  resources :games, only: [:index, :new, :show]
+  resources :games, only: [:create, :update, :destroy],
     constraints: lambda { |req| req.format == :json }
 end

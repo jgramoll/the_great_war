@@ -2,6 +2,7 @@ import * as actionTypes from '../constants/gameListContants'
 
 export const $$initialState = {
   $$games: [],
+  selectedGame: null,
   submitGameError: null,
   isSaving: false
 }
@@ -25,6 +26,12 @@ export default function gameListReducer ($$state = $$initialState, action) {
       return Object.assign({}, $$state, {
         submitGameError: action.error,
         isSaving: false
+      })
+    }
+
+    case actionTypes.SELECT_GAME: {
+      return Object.assign({}, $$state, {
+        selectedGame: action.game
       })
     }
 
