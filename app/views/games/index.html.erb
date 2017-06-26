@@ -1,1 +1,5 @@
-<%= react_component("GameListApp", props: {games: @games || []}, prerender: false) %>
+<%= react_component("GameListApp", props: {
+  games: @games,
+  games_loaed: @games_loaded,
+  selected_game: @selected_game,
+}, prerender: false) %>

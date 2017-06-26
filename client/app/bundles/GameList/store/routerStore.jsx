@@ -6,12 +6,14 @@ import { routerMiddleware, routerReducer } from 'react-router-redux'
 import { browserHistory } from 'react-router'
 
 export default (props, _railsContext) => {
-  const initialGames = props.games
+  const { games, gamesLoaded, selectedGame } = camelizeKeys(props)
   const { $$gamesState } = initialStates
 
   const initialState = {
     $$gamesStore: Object.assign($$gamesState, {
-      $$games: camelizeKeys(initialGames)
+      $$games: games || [],
+      gamesLoaded,
+      selectedGame
     })
   }
 

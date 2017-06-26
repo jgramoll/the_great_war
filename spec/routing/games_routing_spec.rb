@@ -13,7 +13,7 @@ RSpec.describe GamesController, type: :routing do
 
   describe '#show' do
     it 'does not route to #show' do
-      expect(get: '/games/1').to_not be_routable
+      expect(get: '/games/1').to route_to('games#show', id: '1')
     end
 
     it 'routes to #show.json' do

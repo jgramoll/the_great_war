@@ -7,6 +7,7 @@ class GamesController < ApplicationController
   # GET /games.json
   def index
     @games = Game.all.order(created_at: :desc)
+    @games_loaded = true
   end
 
   # GET /comments/new
@@ -15,7 +16,10 @@ class GamesController < ApplicationController
   end
 
   # GET /games/1.json
-  def show; end
+  def show
+    @selected_game = Game.find(params.require(:id))
+    render :index
+  end
 
   # POST /games.json
   def create

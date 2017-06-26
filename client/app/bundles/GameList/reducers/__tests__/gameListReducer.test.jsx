@@ -54,6 +54,19 @@ describe('NewGame::reducers::gameListReducer', function () {
     })
   })
 
+  describe('SELECT_GAME', function () {
+    const game = {id: '1'}
+    const action = {
+      type: actionTypes.SELECT_GAME,
+      game
+    }
+
+    it('sets selectedGame', function () {
+      expect(Subject($$initialState, action).selectedGame)
+        .to.eql(game)
+    })
+  })
+
   function state (attrs) {
     return Object.assign({}, $$initialState, attrs)
   }

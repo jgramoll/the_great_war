@@ -19,21 +19,28 @@ describe('NewGame::actions::gameListActionCreators', function () {
     })
   })
 
-  describe('submitGameSuccess', function () {
-    const game = { id: '1' }
-
-    returnsCorrectHash(Subject.submitGameSuccess(game), {
-      type: actionTypes.SUBMIT_GAME_SUCCESS,
-      game
-    })
-  })
-
   describe('submitGameFailure', function () {
     const error = 'no name'
 
     returnsCorrectHash(Subject.submitGameFailure(error), {
       type: actionTypes.SUBMIT_GAME_FAILURE,
       error
+    })
+  })
+
+  // test fails with [] instead of Array
+  // eslint-disable-next-line no-array-constructor
+  Array(
+    { subject: Subject.submitGameSuccess, type: actionTypes.SUBMIT_GAME_SUCCESS },
+    { subject: Subject.selectGame, type: actionTypes.SELECT_GAME }
+  ).forEach(function ({ subject, type }) {
+    describe(subject.name, function () {
+      const game = { id: '1' }
+
+      returnsCorrectHash(subject(game), {
+        type,
+        game
+      })
     })
   })
 

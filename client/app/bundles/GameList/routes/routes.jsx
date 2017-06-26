@@ -1,20 +1,24 @@
 import React from 'react'
 import { Route, IndexRoute } from 'react-router'
-import GameListContainer from '../containers/gameListContainer'
-import NewGameContainer from '../containers/newGameContainer'
+import * as Containers from '../containers'
 
 export default (
   <Route path="/">
     <IndexRoute
-      component={GameListContainer}
+      component={Containers.gameListContainer}
     />
-    <Route
-      path="/games"
-      component={GameListContainer}
-    />
-    <Route
-      path="/games/new"
-      component={NewGameContainer}
-    />
+    <Route path="games">
+      <IndexRoute
+        component={Containers.gameListContainer}
+      />
+      <Route
+        path="new"
+        component={Containers.newGameContainer}
+      />
+      <Route
+        path=":id"
+        component={Containers.gameDetailsContainer}
+      />
+    </Route>
   </Route>
 )
