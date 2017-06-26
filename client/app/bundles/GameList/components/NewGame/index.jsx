@@ -2,8 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import createReactClass from 'create-react-class'
 import css from './index.scss'
+import Header from '../Header'
 import { injectIntl, intlShape } from 'react-intl'
-import { Link } from 'react-router'
 import { defaultMessages } from 'libs/i18n/default'
 
 const NewGame = createReactClass({
@@ -11,15 +11,11 @@ const NewGame = createReactClass({
     const { intl, submitGameError } = this.props
     return (
       <div>
-        <header>
-          <Link to="/games">
-            {intl.formatMessage(defaultMessages.games)}
-          </Link>
-          <div className={css['create-game-error']}>
-            {submitGameError}
-          </div>
-        </header>
+        <Header intl={intl} />
         <h1>{intl.formatMessage(defaultMessages.newGame)}</h1>
+        <div className={css['create-game-error']}>
+          {submitGameError}
+        </div>
         <form >
           <label htmlFor="name">
             {intl.formatMessage(defaultMessages.name)}
