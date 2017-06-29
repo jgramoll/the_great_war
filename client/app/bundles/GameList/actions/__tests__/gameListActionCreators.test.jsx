@@ -2,7 +2,6 @@ import * as Subject from '../gameListActionCreators'
 import * as actionTypes from '../../constants/gameListContants'
 import { push } from 'react-router-redux'
 import { IntlProvider } from 'react-intl'
-
 import { initSinonSuite } from 'libs/testHelpers/sinonSuite'
 
 describe('NewGame::actions::gameListActionCreators', function () {
