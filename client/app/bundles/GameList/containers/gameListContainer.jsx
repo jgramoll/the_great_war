@@ -1,9 +1,12 @@
-import { connect } from 'react-redux'
 import GameList from '../components/GameList'
+import { connect } from 'react-redux'
 import * as actions from '../actions/gameListActionCreators'
 
-const mapStateToProps = (state) => {
-  return { games: state.$$gamesStore.$$games }
+const mapStateToProps = ({ $$gamesStore }) => {
+  return {
+    games: $$gamesStore.$$games,
+    gamesLoaded: $$gamesStore.gamesLoaded
+  }
 }
 
 export default connect(mapStateToProps, actions)(GameList)

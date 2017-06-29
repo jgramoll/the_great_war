@@ -10,7 +10,7 @@ class GamesController < ApplicationController
     @games_loaded = true
   end
 
-  # GET /comments/new
+  # GET /games/new
   def new
     render :index
   end
