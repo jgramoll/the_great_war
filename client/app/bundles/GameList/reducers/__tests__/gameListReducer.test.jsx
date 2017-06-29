@@ -3,6 +3,10 @@ import * as actionTypes from '../../constants/gameListContants'
 import 'babel-polyfill'
 
 describe('NewGame::reducers::gameListReducer', function () {
+  const game = { id: '1' }
+  const games = [game]
+  const existingGame = { id: '2' }
+
   it('uses default state', function () {
     expect(Subject(undefined, {})).to.eq($$initialState)
   })
@@ -11,48 +15,29 @@ describe('NewGame::reducers::gameListReducer', function () {
     expect(Subject($$initialState, {})).to.eq($$initialState)
   })
 
-  describe('SET_IS_SAVING', function () {
-    const action = {
-      type: actionTypes.SET_IS_SAVING
+  Array(
+    { type: 'SET_IS_FETCHING', prop: 'isFetching' },
+    { type: 'SET_IS_SAVING', prop: 'isSaving' }
+  ).forEach(setsState)
+
+  Array(
+    {
+      successType: actionTypes.FETCH_GAMES_SUCCESS,
+      successParam: { games },
+      successResult: games,
+      resets: 'isFetching',
+      failureType: actionTypes.FETCH_GAMES_FAILURE,
+      failureProp: 'fetchGameError'
+    },
+    {
+      successType: actionTypes.SUBMIT_GAME_SUCCESS,
+      successParam: { game },
+      successResult: [game, existingGame],
+      resets: 'isSaving',
+      failureType: actionTypes.SUBMIT_GAME_FAILURE,
+      failureProp: 'submitGameError'
     }
-
-    it('sets isSaving', function () {
-      expect(Subject($$initialState, action).isSaving).to.eql(true)
-    })
-  })
-
-  describe('SUBMIT_GAME_SUCCESS', function () {
-    const game = { id: '1' }
-    const action = {
-      type: actionTypes.SUBMIT_GAME_SUCCESS,
-      game
-    }
-
-    resetsIsSaving(action)
-
-    it('prepends game', function () {
-      const existingGame = { id: '2' }
-      expect(Subject(state({$$games: [existingGame]}), action).$$games).to.eql([
-        game,
-        existingGame
-      ])
-    })
-  })
-
-  describe('SUBMIT_GAME_FAILURE', function () {
-    const error = 'bad'
-    const action = {
-      type: actionTypes.SUBMIT_GAME_FAILURE,
-      error
-    }
-
-    resetsIsSaving(action)
-
-    it('sets submitGameError', function () {
-      expect(Subject($$initialState, action).submitGameError)
-        .to.eql(error)
-    })
-  })
+  ).forEach(actsLikeAction)
 
   describe('SELECT_GAME', function () {
     const game = {id: '1'}
@@ -71,9 +56,47 @@ describe('NewGame::reducers::gameListReducer', function () {
     return Object.assign({}, $$initialState, attrs)
   }
 
-  function resetsIsSaving (action) {
-    it('resets isSaving', function () {
-      expect(Subject(state({isSaving: true}), action).isSaving)
+  function setsState ({type, prop}) {
+    describe(type, function () {
+      it(`sets ${prop}`, function () {
+        expect(Subject($$initialState, { type })[prop]).to.eql(true)
+      })
+    })
+  }
+
+  function actsLikeAction (action) {
+    describe(action.successType, function () {
+      const props = Object.assign({}, {
+        type: action.successType
+      }, action.successParam)
+
+      resetsState(action.resets, props)
+
+      it('resolves prop', function () {
+        expect(Subject(state({$$games: [existingGame]}), props).$$games)
+          .to.eql(action.successResult)
+      })
+    })
+
+    describe(action.failureType, function () {
+      const error = 'bad'
+      const props = {
+        type: action.failureType,
+        error
+      }
+
+      resetsState(action.resets, props)
+
+      it(`sets ${action.failureProp}`, function () {
+        expect(Subject($$initialState, props)[action.failureProp])
+          .to.eql(error)
+      })
+    })
+  }
+
+  function resetsState (prop, action) {
+    it(`resets ${state}`, function () {
+      expect(Subject(state({[prop]: true}), action)[prop])
         .to.eql(false)
     })
   }

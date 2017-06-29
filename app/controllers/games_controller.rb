@@ -24,7 +24,7 @@ class GamesController < ApplicationController
   end
 
   # Public: Get html form for new game
-  # GET /comments/new
+  # GET /games/new
   #
   # Returns Html
   def new

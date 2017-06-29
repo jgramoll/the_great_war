@@ -1,28 +1,22 @@
 import Subject from '../index'
-import sinon from 'sinon'
+import { initSinonSuite } from 'libs/testHelpers/sinonSuite'
 
 describe('libs::requestsManager', function () {
-  beforeEach(function () {
-    this.server = sinon.fakeServer.create()
-  })
-
-  afterEach(function () {
-    this.server.restore()
-  })
+  const sinonSuite = initSinonSuite(this)
 
   describe('send', function () {
     it('sets method', function () {
       const method = 'POST'
       Subject.send(method)
-      expect(this.server.requests.length).to.eq(1)
-      expect(this.server.requests[0].method).to.eq(method)
+      expect(sinonSuite.server.requests.length).to.eq(1)
+      expect(sinonSuite.server.requests[0].method).to.eq(method)
     })
 
     it('sets path', function () {
       const url = '/api/data'
       Subject.send(null, url)
-      expect(this.server.requests.length).to.eq(1)
-      expect(this.server.requests[0].url).to.eq(url)
+      expect(sinonSuite.server.requests.length).to.eq(1)
+      expect(sinonSuite.server.requests[0].url).to.eq(url)
     })
 
     it('decamelizes body', function () {
@@ -30,19 +24,19 @@ describe('libs::requestsManager', function () {
         testProp: 1
       }
       Subject.send('POST', null, body)
-      expect(this.server.requests.length).to.eq(1)
-      expect(this.server.requests[0].requestBody).to.eq(JSON.stringify({
+      expect(sinonSuite.server.requests.length).to.eq(1)
+      expect(sinonSuite.server.requests[0].requestBody).to.eq(JSON.stringify({
         test_prop: 1
       }))
     })
 
     describe('response', function () {
       beforeEach(function () {
-        this.server.configure({autoRespond: true})
+        sinonSuite.server.configure({autoRespond: true})
       })
 
       it('is camelized', function () {
-        this.server.respondWith([200,
+        sinonSuite.server.respondWith([200,
           { 'Content-Type': 'application/json' },
           '{ "prop_test": 1 }'
         ])
@@ -60,11 +54,14 @@ describe('libs::requestsManager', function () {
     })
   })
 
-  describe('post', function () {
-    it('send POST request', function () {
-      Subject.post()
-      expect(this.server.requests.length).to.eq(1)
-      expect(this.server.requests[0].method).to.eq('POST')
+  Array('post', 'get').forEach(function (method) {
+    describe(method, function () {
+      const upper = method.toUpperCase()
+      it(`send ${upper} request`, function () {
+        Subject[method]()
+        expect(sinonSuite.server.requests.length).to.eq(1)
+        expect(sinonSuite.server.requests[0].method).to.eq(upper)
+      })
     })
   })
 })

@@ -12,7 +12,7 @@ RSpec.describe 'Games', type: :request do
       expect(response).to have_http_status(:success)
 
       json = JSON.parse(response.body, symbolize_names: true)
-      expect(json).to eq(games: [])
+      expect(json).to eq([])
     end
 
     context 'games exist' do
@@ -25,8 +25,8 @@ RSpec.describe 'Games', type: :request do
         expect(response).to have_http_status(:success)
 
         json = JSON.parse(response.body, symbolize_names: true)
-        expect(json[:games].count).to eq(2)
-        expect(json[:games].map { |g| g[:id].to_i })
+        expect(json.count).to eq(2)
+        expect(json.map { |g| g[:id].to_i })
           .to eq([game.id, game_2.id])
       end
     end
