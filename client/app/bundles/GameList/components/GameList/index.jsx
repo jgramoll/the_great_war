@@ -9,6 +9,12 @@ import { Link } from 'react-router'
 import { defaultMessages } from 'libs/i18n/default'
 
 const GameList = createReactClass({
+  componentDidMount () {
+    const { gamesLoaded, fetchGames } = this.props
+
+    if (!gamesLoaded) fetchGames()
+  },
+
   render () {
     const { intl, games } = this.props
     return (
@@ -44,7 +50,9 @@ const GameList = createReactClass({
 GameList.propTypes = {
   intl: intlShape.isRequired,
   games: PropTypes.arrayOf(gameSchema).isRequired,
-  selectGame: PropTypes.func.isRequired
+  gamesLoaded: PropTypes.bool.isRequired,
+  selectGame: PropTypes.func.isRequired,
+  fetchGames: PropTypes.func.isRequired
 }
 
 export default injectIntl(GameList)

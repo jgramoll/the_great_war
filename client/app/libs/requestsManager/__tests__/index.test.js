@@ -60,11 +60,14 @@ describe('libs::requestsManager', function () {
     })
   })
 
-  describe('post', function () {
-    it('send POST request', function () {
-      Subject.post()
-      expect(this.server.requests.length).to.eq(1)
-      expect(this.server.requests[0].method).to.eq('POST')
+  Array('post', 'get').forEach(function (method) {
+    describe(method, function () {
+      const upper = method.toUpperCase()
+      it(`send ${upper} request`, function () {
+        Subject[method]()
+        expect(this.server.requests.length).to.eq(1)
+        expect(this.server.requests[0].method).to.eq(upper)
+      })
     })
   })
 })
