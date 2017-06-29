@@ -37,5 +37,6 @@ function formatBody (body) {
 
 export default {
   send,
-  post: send.bind(null, 'POST')
+  post: send.bind(null, 'POST'),
+  get: send.bind(null, 'GET')
 }
