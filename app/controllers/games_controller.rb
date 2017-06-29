@@ -6,7 +6,7 @@ class GamesController < ApplicationController
   # Public: Get list of all games
   # GET /games
   # GET /games.json
-  # 
+  #
   # Examples
   #   # => [
   #     {
@@ -36,7 +36,7 @@ class GamesController < ApplicationController
   # GET /games/1.json
   #
   # id - id of the record
-  # 
+  #
   # Examples
   #   # => {
   #     id: '1',
@@ -55,7 +55,7 @@ class GamesController < ApplicationController
   #
   # name - name of the record
   # gameType - type of game
-  # 
+  #
   # Examples
   #   {
   #     name: 'Demo',
@@ -82,7 +82,7 @@ class GamesController < ApplicationController
   # PATCH/PUT /games/1.json
   #
   # name - name of the record
-  # 
+  #
   # Examples
   #   {
   #     name: 'New Name'

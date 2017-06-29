@@ -3,7 +3,7 @@ require 'features/shared/contexts'
 
 feature 'Games Index', as: :user, js: true do
   scenario 'navigate to new game', page: :games do
-    click_on "New Game"
+    click_on 'New Game'
 
     expect(find('h1')).to have_content 'New Game'
     expect(page.current_path).to eq new_game_path

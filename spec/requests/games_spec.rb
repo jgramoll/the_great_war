@@ -51,15 +51,15 @@ RSpec.describe 'Games', type: :request do
       expect(json[:id]).to_not be_nil
     end
 
-    context "failure" do
-      it "returns unprocessable" do
+    context 'failure' do
+      it 'returns unprocessable' do
         expect {
           post games_path, params: {
-            format: :json,
+            format: :json
           }
-        }.not_to change {
-          Game.count
-        }
+        }.not_to change(
+          Game, :count
+        )
 
         expect(response).to have_http_status(:unprocessable_entity)
       end
