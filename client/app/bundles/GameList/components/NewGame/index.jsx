@@ -12,20 +12,27 @@ const NewGame = createReactClass({
     return (
       <div>
         <Header intl={intl} />
-        <h1>{intl.formatMessage(defaultMessages.newGame)}</h1>
-        <div className={css['create-game-error']}>
-          {submitGameError}
-        </div>
-        <form >
+        <form className={css['new-game-form']}>
+          <h1>{intl.formatMessage(defaultMessages.newGame)}</h1>
           <label htmlFor="name">
             {intl.formatMessage(defaultMessages.name)}
           </label>
-          <input ref={elm => { this.name = elm } } id="name" />
           <input
-            type="submit"
-            value={intl.formatMessage(defaultMessages.create)}
-            onClick={this._submitCreateGame}
+            className={css['new-game-form__name-input']}
+            ref={elm => { this.name = elm } }
+            id="name"
           />
+          <div className={css['new-game-form__create-game-error']}>
+            {submitGameError}
+          </div>
+          <div>
+            <input
+              type="submit"
+              className={css['new-game-form__submit']}
+              value={intl.formatMessage(defaultMessages.create)}
+              onClick={this._submitCreateGame}
+            />
+          </div>
         </form>
       </div>
     )

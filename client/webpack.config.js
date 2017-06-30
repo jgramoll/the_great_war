@@ -32,6 +32,7 @@ const config = {
   resolve: {
     extensions: ['.js', '.jsx'],
     alias: {
+      assets: resolve(__dirname, 'app/assets'),
       libs: resolve(__dirname, 'app/libs')
     }
   },

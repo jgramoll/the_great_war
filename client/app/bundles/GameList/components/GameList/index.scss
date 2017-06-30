@@ -1,25 +1,13 @@
 .game-list {
   max-width: 60rem;
+  margin-left: auto;
+  margin-right: auto;
   padding-bottom: 5rem;
 
   &__new-game {
-    $height: 3rem;
+    composes: btn from 'assets/styles/buttons.scss';
 
-    width: 10rem;
-    height: $height;
-    line-height: $height;
+    line-height: 3rem;
     float: right;
-    border: 1px solid black;
-    border-radius: 10rem;
-    text-align: center;
-    text-decoration: none;
-    font-size: 1.3rem;
-    color: white;
-    background: #106613;
-    text-transform: uppercase;
-
-    &:hover {
-      background: #3c35f2;
-    }
   }
 }
