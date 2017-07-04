@@ -1,24 +1,12 @@
-import React from 'react'
-import { Route, IndexRoute } from 'react-router'
-import * as Containers from '../containers'
+import asyncRoute from 'libs/asyncRoute'
 
-export default (
-  <Route path="/">
-    <IndexRoute
-      component={Containers.gameListContainer}
-    />
-    <Route path="games">
-      <IndexRoute
-        component={Containers.gameListContainer}
-      />
-      <Route
-        path="new"
-        component={Containers.newGameContainer}
-      />
-      <Route
-        path=":id"
-        component={Containers.gameDetailsContainer}
-      />
-    </Route>
-  </Route>
-)
+export default {
+  ...asyncRoute('games', System.import('../startup/GameListApp')),
+
+  indexRoute: asyncRoute(null, System.import('../containers/gameListContainer')),
+
+  childRoutes: [
+    asyncRoute('new', System.import('../containers/newGameContainer')),
+    asyncRoute(':id', System.import('../containers/gameDetailsContainer'))
+  ]
+}
