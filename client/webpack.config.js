@@ -12,20 +12,26 @@ const config = {
   context: resolve(__dirname),
 
   entry: {
-    'webpack-bundle': [
+    'main-core': './app/core/registration',
+    'vendor': [
+      'babel-polyfill',
       'es5-shim/es5-shim',
       'es5-shim/es5-sham',
-      'babel-polyfill',
-      './app/bundles/GameList/startup/registration'
+      'lodash',
+      'react',
+      'react-dom',
+      'react-intl',
+      'react-redux',
+      'react-router',
+      'redux'
     ]
   },
 
   output: {
-    // Name comes from the entry section.
-    filename: '[name]-[hash].js',
+    filename: '[name].[hash].js',
 
-    // Leading slash is necessary
-    publicPath: `/${webpackPublicOutputDir}`,
+    // slashs are necessary
+    publicPath: `/${webpackPublicOutputDir}/`,
     path: webpackOutputPath
   },
 
@@ -38,6 +44,8 @@ const config = {
   },
 
   plugins: [
+    new webpack.optimize.CommonsChunkPlugin({ name: 'vendor' }),
+
     new webpack.ProvidePlugin({ 'Promise': 'promise-polyfill' }),
     new ManifestPlugin({ fileName: manifest, writeToFileEmit: true })
   ],
