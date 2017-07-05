@@ -1,6 +1,5 @@
 import Subject, { $$initialState } from '../gameListReducer'
 import * as actionTypes from '../../constants/gameListContants'
-import 'babel-polyfill'
 
 describe('NewGame::reducers::gameListReducer', function () {
   const game = { id: '1' }

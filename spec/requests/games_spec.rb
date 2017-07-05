@@ -32,6 +32,22 @@ RSpec.describe 'Games', type: :request do
     end
   end
 
+  describe 'GET /games/:id' do
+    let(:game) { a_game }
+
+    it 'returns game' do
+      get game_path(game.id), params: { format: :json }
+      expect(response).to have_http_status(:success)
+
+      json = JSON.parse(response.body, symbolize_names: true)
+      expect(json).to include({
+        :id => game.id.to_s,
+        :name => game.name,
+        :game_type => game.game_type
+      })
+    end
+  end
+
   describe 'POST /games' do
     it 'creates and returns new game' do
       expect {

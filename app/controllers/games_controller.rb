@@ -46,8 +46,7 @@ class GamesController < ApplicationController
   #
   # Returns Game Record
   def show
-    @selected_game = Game.find(params.require(:id))
-    render :index
+    render :show, status: :ok, location: @game
   end
 
   # Public: Create a game
@@ -115,7 +114,7 @@ class GamesController < ApplicationController
 
   # Private: set game attr before actions
   def set_game
-    @game = Game.find(params[:id])
+    @game = Game.find(params.require(:id))
   end
 
   # Private: Game params permitted

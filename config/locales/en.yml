@@ -9,4 +9,5 @@ en:
             one {message}
             other {messages}
           }"
-  
+  join: "Join"
+  the_great_war: "The Great War"

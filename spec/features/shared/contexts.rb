@@ -14,6 +14,9 @@ end
 shared_context 'Game Details' do
   before { visit game_path(game) }
 end
+shared_context 'The Great War Details' do
+  before { visit the_great_war_path(game) }
+end
 
 # Fixtures
 shared_context 'Existing Games' do |existing_games|
@@ -28,4 +31,5 @@ RSpec.configure do |rspec|
   rspec.include_context 'Game Index', page: :games
   rspec.include_context 'New Game Form', page: :new_game
   rspec.include_context 'Game Details', page: :game
+  rspec.include_context 'The Great War Details', page: :the_great_war
 end

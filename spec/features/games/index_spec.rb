@@ -23,14 +23,5 @@ feature 'Games Index', as: :user, js: true do
       expect(find('h1')).to have_content game.name
       expect(page.current_path).to eq game_path(game)
     end
-
-    describe 'navigate to games', page: :new_game do
-      scenario 'fetches games' do
-        click_on 'Games'
-
-        expect(page).to have_css('.game-row', count: 2)
-        expect(page.current_path).to eq games_path
-      end
-    end
   end
 end

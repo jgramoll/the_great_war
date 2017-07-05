@@ -1,7 +1,10 @@
 require 'rails_helper'
 require 'features/shared/contexts'
+require 'features/shared/examples'
 
 feature 'Games create', as: :user, page: :new_game, js: true do
+  include_examples 'navigate to games'
+
   scenario 'click create button' do
     new_game_name = 'santa'
 
