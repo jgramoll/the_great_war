@@ -4,6 +4,7 @@ import css from './index.scss'
 import Header from '../Header'
 import gameSchema from '../../schemas/game'
 import { injectIntl, intlShape } from 'react-intl'
+import { Link } from 'react-router'
 
 const GameDetails = createReactClass({
   render () {
@@ -13,6 +14,9 @@ const GameDetails = createReactClass({
       <div>
         <Header intl={intl} />
         <h1 className={css.gameTitle}>{game.name}</h1>
+        <Link to={`/the_great_war/${game.id}`}>
+          {intl.formatMessage(defaultMessages.join)}
+        </Link>
       </div>
     )
   }

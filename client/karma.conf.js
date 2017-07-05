@@ -10,7 +10,10 @@ module.exports = function (config) {
   config.set({
     frameworks: ['intl-shim', 'mocha', 'chai'],
 
-    files: files.map(f => { return {pattern: f, watched: false} }),
+    files: [
+      './node_modules/babel-polyfill/dist/polyfill.js',
+      ...files.map(f => { return {pattern: f, watched: false} })
+    ],
 
     webpack: webpackConfig,
 
