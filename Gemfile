@@ -37,6 +37,6 @@ group :test do
   gem 'chromedriver-helper'
   gem 'poltergeist'
   gem 'rspec-rails'
-  gem 'selenium-webdriver'
+  gem 'selenium-webdriver', '>= 3.4.3'
   gem 'simplecov', require: false
 end
