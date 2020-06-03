@@ -35,7 +35,7 @@ group :test do
   gem 'capybara'
   gem 'capybara-screenshot'
   gem 'chromedriver-helper'
-  gem 'poltergeist'
+  gem 'poltergeist', '>= 1.15.0'
   gem 'rspec-rails'
   gem 'selenium-webdriver'
   gem 'simplecov', require: false
