@@ -32,10 +32,10 @@ group :development do
 end
 
 group :test do
-  gem 'capybara'
-  gem 'capybara-screenshot'
+  gem 'capybara', '>= 2.14.1'
+  gem 'capybara-screenshot', '>= 1.0.14'
   gem 'chromedriver-helper'
-  gem 'poltergeist'
+  gem 'poltergeist', '>= 1.15.0'
   gem 'rspec-rails'
   gem 'selenium-webdriver'
   gem 'simplecov', require: false
