@@ -36,7 +36,7 @@ group :test do
   gem 'capybara-screenshot'
   gem 'chromedriver-helper'
   gem 'poltergeist'
-  gem 'rspec-rails'
+  gem 'rspec-rails', '>= 8.0.0'
   gem 'selenium-webdriver'
   gem 'simplecov', require: false
 end
